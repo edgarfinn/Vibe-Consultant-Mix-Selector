@@ -10,8 +10,8 @@ searchBar.addEventListener('submit', searchHandler)
 function searchHandler(event){
   event.preventDefault();
   var searchInput = event.target.childNodes[1].value;
-  // makeRequest(formatQueryString(searchInput), extractMixUrls);
-  generateDOMNodes(formatMixUrls(mockResults));
+  makeRequest(formatQueryString(searchInput), extractMixUrls);
+
 }
 
 
@@ -49,8 +49,8 @@ function makeRequest(queryString, callback) {
       // Render-To-DOM-function-callback
     }
   }
-  // xhr.open("GET", url);
-  // xhr.send();
+  xhr.open("GET", url);
+  xhr.send();
 
 };
 
@@ -63,7 +63,7 @@ function extractMixUrls(mixList){
   mixList.data.forEach(function(responseObj){
     urlNodes.push(responseObj.url);
   });
-  formatMixUrl(urlNodes);
+  formatMixUrls(urlNodes);
 }
 
 function formatMixUrls(urlNodes) {
@@ -71,7 +71,7 @@ function formatMixUrls(urlNodes) {
   urlNodes.forEach(function(url){
     formattedUrls.push(url.replace(/https:\/\/www/,"https://api")+"embed-html/");
   })
-  return formattedUrls;
+  generateDOMNodes(formattedUrls);
 }
 
 // populate resuults list
